@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+      <servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.test</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+    
+	
+    <servlet>
+		<servlet-name>choice</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.choice</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>choice</servlet-name>
+		<url-pattern>/choice</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>pathdb</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.pathdb</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>pathdb</servlet-name>
+		<url-pattern>/pathdb</url-pattern>
+	</servlet-mapping>
+    
+    
+    <servlet>
+		<servlet-name>showmore</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.showmore</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>showmore</servlet-name>
+		<url-pattern>/showmore</url-pattern>
+	</servlet-mapping>
+    
+	<servlet>
+		<servlet-name>search</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.search</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>search</servlet-name>
+		<url-pattern>/search</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>getpath</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.getpath</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>getpath</servlet-name>
+		<url-pattern>/getpath</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>
