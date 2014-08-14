@@ -11,6 +11,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,19 +35,28 @@ public class getpath extends HttpServlet {
 	static final int MULTICAST_SIZE = 1000;
 	private static final FetchOptions DEFAULT_FETCH_OPTIONS = FetchOptions.Builder
 			.withPrefetchSize(MULTICAST_SIZE).chunkSize(MULTICAST_SIZE);
+	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
+		// http://imagenetapi.appspot.com/getpath?node=google,1&act=1&number=1077
 		if (req.getParameter("act").equals("1")) {
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
 			Transaction txn = datastore.beginTransaction();
 
 			@SuppressWarnings("deprecation")
-			Query query = new Query("path").addFilter("node",
-					FilterOperator.EQUAL, req.getParameter("node"));
+			Query query = new Query("path");
+			query.addFilter("node", Query.FilterOperator.EQUAL,
+					req.getParameter("node"));
+			query.addFilter("number", Query.FilterOperator.EQUAL,
+					req.getParameter("number"));
+			// 會出這個SELECT * FROM path WHERE userId = google,1 AND providerId =
+			// 1077
+
 			PreparedQuery preparedQuery = datastore.prepare(query);
+			logger.severe("preparedQuery" + preparedQuery);
 			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
 			Entity entity = null;
 			if (!entities.isEmpty()) {
@@ -198,6 +208,21 @@ public class getpath extends HttpServlet {
 				}
 
 			}
+		} else if (req.getParameter("act").equals("8")) {
+			//輸出path每個的number值
+			DatastoreService datastore = DatastoreServiceFactory
+					.getDatastoreService();
+			@SuppressWarnings("deprecation")
+			Query query = new Query("path");
+			query.equals("number");
+			PreparedQuery preparedQuery = datastore.prepare(query);
+			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			Entity entity = null;
+			if (entities != null)
+				for (int i = 0; i < entities.size(); i++) {
+					entity = entities.get(i);
+					resp.getWriter().println(entity.getProperty("number"));
+				}
 		}
 	}
 
