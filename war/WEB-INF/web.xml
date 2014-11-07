@@ -14,6 +14,27 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/test</url-pattern>
 	</servlet-mapping>
     
+		<servlet>
+		<servlet-name>selfdrawdb</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.selfdrawdb</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>selfdrawdb</servlet-name>
+		<url-pattern>/selfdrawdb</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+			<servlet>
+		<servlet-name>coursedb</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.coursedb</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>coursedb</servlet-name>
+		<url-pattern>/coursedb</url-pattern>
+	</servlet-mapping>
+	
+	
 	
     <servlet>
 		<servlet-name>choice</servlet-name>
@@ -59,6 +80,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>getpath</servlet-name>
 		<url-pattern>/getpath</url-pattern>
+	</servlet-mapping>
+	
+			<servlet>
+		<servlet-name>coursegetpath</servlet-name>
+		<servlet-class>ncnu.csie.viplab.mjimagenetapi.coursegetpath</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>coursegetpath</servlet-name>
+		<url-pattern>/coursegetpath</url-pattern>
 	</servlet-mapping>
 	
 	

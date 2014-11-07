@@ -55,6 +55,7 @@ public class pathdb extends HttpServlet {
 		logger.severe(name);
 		// 設定entity 實體的屬性
 		entity.setProperty("number", "" + (i - 1));
+		entity.setProperty("original_pic_url", req.getParameter("original_pic_url"));
 		entity.setProperty("node", req.getParameter("node"));
 		entity.setProperty("nodenumber", req.getParameter("nodenumber"));
 		entity.setProperty("width", req.getParameter("width"));

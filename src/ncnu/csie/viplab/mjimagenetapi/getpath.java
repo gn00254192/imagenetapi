@@ -46,51 +46,18 @@ public class getpath extends HttpServlet {
 					.getDatastoreService();
 			Transaction txn = datastore.beginTransaction();
 
-			@SuppressWarnings("deprecation")
-			Query query = new Query("path");
-			query.addFilter("node", Query.FilterOperator.EQUAL,
-					req.getParameter("node"));
-			query.addFilter("number", Query.FilterOperator.EQUAL,
-					req.getParameter("number"));
-			// 會出這個SELECT * FROM path WHERE userId = google,1 AND providerId =
-			// 1077
-
-			PreparedQuery preparedQuery = datastore.prepare(query);
-			logger.severe("preparedQuery" + preparedQuery);
-			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
-			Entity entity = null;
-			if (!entities.isEmpty()) {
-				entity = entities.get(0);
-				try {
-					resp.getWriter().println(entity.getKey().getId());
-					resp.getWriter().println(entity.getProperty("url"));
-					resp.getWriter().println(entity.getProperty("pin"));
-					resp.getWriter().println(entity.getProperty("width"));
-					resp.getWriter().println(entity.getProperty("hight"));
-					resp.getWriter().println(entity.getProperty("deviceid"));
-					resp.getWriter().println(entity.getProperty("node"));
-					resp.getWriter().println(entity.getProperty("nodenumber"));
-					resp.getWriter().println(entity.getProperty("number"));
-					resp.getWriter().println(entity.getProperty("search"));
-					for (int j = 0; j <= Integer.parseInt(entity.getProperty(
-							"number").toString()); j++)
-						resp.getWriter().print(entity.getProperty("path" + j));
-
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			}
-			txn.commit();
-
-		} else if (req.getParameter("act").equals("2")) {
-			resp.getWriter().println("sdfgerg");
-
-			DatastoreService datastore = DatastoreServiceFactory
-					.getDatastoreService();
-			Transaction txn = datastore.beginTransaction();
-
+			//-----------------------------用key查詢方式--------------------------
+			//SELECT * FROM path where __key__ = KEY('ag1zfmltYWdlbmV0YXBpchELEgRwYXRoGICAgMDIqoQJDA')
+			//----------------------------------------------------------------
+			
+			
+			
+//			@SuppressWarnings("deprecation")
+//			Query query = new Query("path");
+//			query.addFilter("node", Query.FilterOperator.EQUAL,
+//					req.getParameter("node"));
+//			query.addFilter("key", Query.FilterOperator.EQUAL,
+//				Long.parseLong(req.getParameter("key")));
 			Key personKey = KeyFactory.createKey("path",
 					Long.parseLong(req.getParameter("key")));
 			Entity entity = null;
@@ -101,22 +68,19 @@ public class getpath extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			resp.getWriter().println(entity.getProperty("url"));
-			datastore.delete(entity.getKey());
-			txn.commit();
-		} else if (req.getParameter("act").equals("3")) {
-			DatastoreService datastore = DatastoreServiceFactory
-					.getDatastoreService();
-			Transaction txn = datastore.beginTransaction();
 
-			@SuppressWarnings("deprecation")
-			Query query = new Query("ans").addFilter("node",
-					FilterOperator.EQUAL, req.getParameter("node"));
-			PreparedQuery preparedQuery = datastore.prepare(query);
-			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
-			Entity entity = null;
-			if (!entities.isEmpty()) {
-				entity = entities.get(0);
+			logger.severe("personKey" + personKey);
+			logger.severe("personKey" + entity);
+			// 會出這個SELECT * FROM path WHERE userId = google,1 AND providerId =
+			// 1077
+
+			//PreparedQuery preparedQuery = datastore.prepare(query);
+			//logger.severe("preparedQuery" + preparedQuery);
+			//List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			//Entity entity = null;
+		
+			//if (!entities.isEmpty()) {
+			//	entity = entities.get(0);
 				try {
 					resp.getWriter().println(entity.getKey().getId());
 					resp.getWriter().println(entity.getProperty("url"));
@@ -127,6 +91,7 @@ public class getpath extends HttpServlet {
 					resp.getWriter().println(entity.getProperty("node"));
 					resp.getWriter().println(entity.getProperty("nodenumber"));
 					resp.getWriter().println(entity.getProperty("number"));
+					resp.getWriter().println(entity.getProperty("original_pic_url"));
 					resp.getWriter().println(entity.getProperty("search"));
 					for (int j = 0; j <= Integer.parseInt(entity.getProperty(
 							"number").toString()); j++)
@@ -137,17 +102,27 @@ public class getpath extends HttpServlet {
 					e.printStackTrace();
 				}
 
-			}
+			//}
 			txn.commit();
 
-		} else if (req.getParameter("act").equals("4")) {
-			resp.getWriter().println("sdfgerg");
-
+		} else if (req.getParameter("act").equals("2")) {
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
 			Transaction txn = datastore.beginTransaction();
 
-			Key personKey = KeyFactory.createKey("ans",
+			//-----------------------------用key查詢方式--------------------------
+			//SELECT * FROM path where __key__ = KEY('ag1zfmltYWdlbmV0YXBpchELEgRwYXRoGICAgMDIqoQJDA')
+			//----------------------------------------------------------------
+			
+			
+			
+//			@SuppressWarnings("deprecation")
+//			Query query = new Query("path");
+//			query.addFilter("node", Query.FilterOperator.EQUAL,
+//					req.getParameter("node"));
+//			query.addFilter("key", Query.FilterOperator.EQUAL,
+//				Long.parseLong(req.getParameter("key")));
+			Key personKey = KeyFactory.createKey("coursepath",
 					Long.parseLong(req.getParameter("key")));
 			Entity entity = null;
 			try {
@@ -157,10 +132,125 @@ public class getpath extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			resp.getWriter().println(entity.getProperty("url"));
-			datastore.delete(entity.getKey());
+
+			logger.severe("personKey" + personKey);
+			logger.severe("personKey" + entity);
+			// 會出這個SELECT * FROM path WHERE userId = google,1 AND providerId =
+			// 1077
+
+			//PreparedQuery preparedQuery = datastore.prepare(query);
+			//logger.severe("preparedQuery" + preparedQuery);
+			//List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			//Entity entity = null;
+		
+			//if (!entities.isEmpty()) {
+			//	entity = entities.get(0);
+				try {
+					resp.getWriter().println(entity.getKey().getId());					
+					resp.getWriter().println(entity.getProperty("width"));
+					resp.getWriter().println(entity.getProperty("hight"));
+					resp.getWriter().println(entity.getProperty("deviceid"));
+					for (int j = 0; j <= Integer.parseInt(entity.getProperty(
+							"number").toString()); j++)
+						resp.getWriter().print(entity.getProperty("path" + j));
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			//}
 			txn.commit();
-		} else if (req.getParameter("act").equals("5")) {
+
+		} else if (req.getParameter("act").equals("3")) {
+			//輸出path每個的number值
+			DatastoreService datastore = DatastoreServiceFactory
+					.getDatastoreService();
+			@SuppressWarnings("deprecation")
+			Query query = new Query("path");		
+			PreparedQuery preparedQuery = datastore.prepare(query);
+			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			Entity entity = null;
+			if (entities != null)
+				for (int i = 0; i < entities.size(); i++) {
+					entity = entities.get(i);
+					resp.getWriter().println(entity.getKey().getId());
+				}
+		}
+		
+		else if (req.getParameter("act").equals("4")) {
+			//輸出path每個的number值
+			DatastoreService datastore = DatastoreServiceFactory
+					.getDatastoreService();
+			@SuppressWarnings("deprecation")
+			Query query = new Query("coursepath");		
+			PreparedQuery preparedQuery = datastore.prepare(query);
+			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			Entity entity = null;
+			if (entities != null)
+				for (int i = 0; i < entities.size(); i++) {
+					entity = entities.get(i);
+					resp.getWriter().println(entity.getKey().getId());
+				}
+		}
+		
+//		else if (req.getParameter("act").equals("3")) {
+//			DatastoreService datastore = DatastoreServiceFactory
+//					.getDatastoreService();
+//			Transaction txn = datastore.beginTransaction();
+//
+//			@SuppressWarnings("deprecation")
+//			Query query = new Query("ans").addFilter("node",
+//					FilterOperator.EQUAL, req.getParameter("node"));
+//			PreparedQuery preparedQuery = datastore.prepare(query);
+//			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+//			Entity entity = null;
+//			if (!entities.isEmpty()) {
+//				entity = entities.get(0);
+//				try {
+//					resp.getWriter().println(entity.getKey().getId());
+//					resp.getWriter().println(entity.getProperty("url"));
+//					resp.getWriter().println(entity.getProperty("pin"));
+//					resp.getWriter().println(entity.getProperty("width"));
+//					resp.getWriter().println(entity.getProperty("hight"));
+//					resp.getWriter().println(entity.getProperty("deviceid"));
+//					resp.getWriter().println(entity.getProperty("node"));
+//					resp.getWriter().println(entity.getProperty("nodenumber"));
+//					resp.getWriter().println(entity.getProperty("number"));
+//					resp.getWriter().println(entity.getProperty("search"));
+//					for (int j = 0; j <= Integer.parseInt(entity.getProperty(
+//							"number").toString()); j++)
+//						resp.getWriter().print(entity.getProperty("path" + j));
+//
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//
+//			}
+//			txn.commit();
+//
+//		} else if (req.getParameter("act").equals("4")) {
+//			resp.getWriter().println("sdfgerg");
+//
+//			DatastoreService datastore = DatastoreServiceFactory
+//					.getDatastoreService();
+//			Transaction txn = datastore.beginTransaction();
+//
+//			Key personKey = KeyFactory.createKey("ans",
+//					Long.parseLong(req.getParameter("key")));
+//			Entity entity = null;
+//			try {
+//				entity = datastore.get(personKey);
+//
+//			} catch (EntityNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			resp.getWriter().println(entity.getProperty("url"));
+//			datastore.delete(entity.getKey());
+//			txn.commit();}
+		 else if (req.getParameter("act").equals("5")) {
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
 			@SuppressWarnings("deprecation")
@@ -213,17 +303,78 @@ public class getpath extends HttpServlet {
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
 			@SuppressWarnings("deprecation")
-			Query query = new Query("path");
-			query.equals("number");
+			Query query = new Query("path");		
 			PreparedQuery preparedQuery = datastore.prepare(query);
 			List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
 			Entity entity = null;
 			if (entities != null)
 				for (int i = 0; i < entities.size(); i++) {
 					entity = entities.get(i);
-					resp.getWriter().println(entity.getProperty("number"));
+					resp.getWriter().println(entity.getKey().getId());
 				}
 		}
+		else if (req.getParameter("act").equals("9")) {
+			DatastoreService datastore = DatastoreServiceFactory
+					.getDatastoreService();
+			Transaction txn = datastore.beginTransaction();
+
+			//-----------------------------用key查詢方式--------------------------
+			//SELECT * FROM path where __key__ = KEY('ag1zfmltYWdlbmV0YXBpchELEgRwYXRoGICAgMDIqoQJDA')
+			//----------------------------------------------------------------
+			
+			
+			
+//			@SuppressWarnings("deprecation")
+//			Query query = new Query("path");
+//			query.addFilter("node", Query.FilterOperator.EQUAL,
+//					req.getParameter("node"));
+//			query.addFilter("key", Query.FilterOperator.EQUAL,
+//				Long.parseLong(req.getParameter("key")));
+			Key personKey = KeyFactory.createKey("coursepath",
+					Long.parseLong(req.getParameter("key")));
+			Entity entity = null;
+			try {
+				entity = datastore.get(personKey);
+
+			} catch (EntityNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			logger.severe("personKey" + personKey);
+			logger.severe("personKey" + entity);
+
+			// 會出這個SELECT * FROM path WHERE userId = google,1 AND providerId =
+			// 1077
+
+			//PreparedQuery preparedQuery = datastore.prepare(query);
+			//logger.severe("preparedQuery" + preparedQuery);
+			//List<Entity> entities = preparedQuery.asList(DEFAULT_FETCH_OPTIONS);
+			//Entity entity = null;
+		
+			//if (!entities.isEmpty()) {
+			//	entity = entities.get(0);
+				try {
+					resp.getWriter().println(entity.getKey().getId());
+					
+	
+					resp.getWriter().println(entity.getProperty("width"));
+					resp.getWriter().println(entity.getProperty("hight"));
+					resp.getWriter().println(entity.getProperty("deviceid"));
+
+					for (int j = 0; j <= Integer.parseInt(entity.getProperty(
+							"number").toString()); j++)
+						resp.getWriter().print(entity.getProperty("path" + j));
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			//}
+			txn.commit();
+
+		} 
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
